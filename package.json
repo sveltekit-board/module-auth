@@ -9,6 +9,7 @@
   "author": "hotsixisbest",
   "license": "ISC",
   "dependencies": {
+    "@sveltekit-board/setting": "^0.0.1",
     "@sveltekit-board/user": "^0.1.2"
   }
 }
