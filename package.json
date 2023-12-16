@@ -9,7 +9,9 @@
   "author": "hotsixisbest",
   "license": "ISC",
   "dependencies": {
+    "@sveltekit-board/db": "^0.3.0",
     "@sveltekit-board/setting": "^0.0.1",
-    "@sveltekit-board/user": "^0.1.2"
+    "@sveltekit-board/user": "^0.1.2",
+    "nodemailer": "^6.9.7"
   }
 }

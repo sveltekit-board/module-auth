@@ -1,5 +1,10 @@
 {
     "register":{
-        "NOT_EXIST_EMAIL" : "이메일 인증을 사용하는데 이메일을 입력하지 않음."
+        "NOT_EXIST_EMAIL" : "이메일 인증을 사용하는데 이메일을 입력하지 않음.",
+        "REGEX_NOT_MATCH_ID":"아이디가 비어있거나 형식에 맞지 않음",
+        "REGEX_NOT_MATCH_PASSWORD":"비밀번호가 비어있거나 형식에 맞지 않음",
+        "REGEX_NOT_MATCH_NICKNAME":"닉네임이 비어있거나 형식에 맞지 않음",
+        "REGEX_NOT_MATCH_EMAIL":"이메일이 비어있거나 형식에 맞지 않음",
+        "INVALID_ID_OR_CODE": "인증 코드 또는 아이디가 유효하지 않습니다."
     }
 }

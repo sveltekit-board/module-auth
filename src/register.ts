@@ -1,6 +1,8 @@
 import user from '@sveltekit-board/user';
 import AuthError from './error';
 import regEx from './regEx';
+import { hash } from './hash';
+import { createVerificationCode } from './emailVerify';
 
 const createUser = user.createUser;
 
@@ -39,12 +41,14 @@ export async function register(option: userOption, useEmailVerification: boolean
         }
     }
 
+    //비번 HASH
+    option.password = hash(option.id, option.password);
 
     if(useEmailVerification){
-        //여기다가 이메일 인증 만드쇼
+        await createVerificationCode(option.id);
         return await createUser({...option,verified:false})
     }
     else{
         return await createUser({...option, verified: true});
     }
-}
+} 
