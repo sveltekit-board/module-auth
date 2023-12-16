@@ -2,7 +2,7 @@ import user from '@sveltekit-board/user';
 import AuthError from './error';
 import regEx from './regEx';
 import { hash } from './hash';
-import { createVerificationCode } from './emailVerify';
+import { createVerify } from './emailVerify';
 
 const createUser = user.createUser;
 
@@ -15,10 +15,12 @@ interface userOption {
     registerIp: string
 }
 
+/* 이거 쓰려나?
 interface VerifyCallback{
     callback:() => boolean
     params:any[]
 }
+*/
 
 export async function register(option: userOption, useEmailVerification: boolean) {
     if (useEmailVerification && !option.email) {
@@ -45,7 +47,7 @@ export async function register(option: userOption, useEmailVerification: boolean
     option.password = hash(option.id, option.password);
 
     if(useEmailVerification){
-        await createVerificationCode(option.id);
+        await createVerify(option.id);
         return await createUser({...option,verified:false})
     }
     else{

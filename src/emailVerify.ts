@@ -1,11 +1,11 @@
 import { runQuery } from "@sveltekit-board/db";
 import AuthError from "./error";
 
-export async function createVerificationCode(id: string) {
+export async function createVerify(id: string) {
     let code = Math.floor(Math.random() * 1000000);
 
     if (code < 100000) {
-        return await createVerificationCode(id);
+        return await createVerify(id);
     }
 
     try {
@@ -19,7 +19,7 @@ export async function createVerificationCode(id: string) {
             return code;
         }
         else {
-            return await createVerificationCode(id);
+            return await createVerify(id);
         }
     }
     catch (err) {
