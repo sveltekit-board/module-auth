@@ -1,8 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-import { JWTCreateOption } from "./jwt.server";
+import { JWTCreateOption, JWTToken  } from "./lib/jwt.server.js";
 import { JWT } from "@auth/core/jwt";
-import { JWTToken } from "./jwt.server";
 
 declare global {
 	namespace App {

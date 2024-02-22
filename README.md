@@ -1,58 +1,51 @@
-# create-svelte
+# @sveltekit-board/auth
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+개발중입니다.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## 설명
+auth.js를 이용한 인증입니다.
 
-## Creating a project
+## 설치
+`npm install @sveltekit-board/auth`
 
-If you're seeing this, you've probably already done this step. Congrats!
+## api
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### hooks.server.ts 설정 예시
+```ts
+import { sequence } from "@sveltejs/kit/hooks";
+import {auth, handleJwt} from "@sveltekit-board/auth"
+import Github from "@auth/core/providers/github";
+import { config } from 'dotenv';
+config();
 
-# create a new project in my-app
-npm create svelte@latest my-app
+export const handle = sequence(
+    auth([
+        Github({
+            clientId: 'client',
+            clientSecret: 'secret'
+        })
+    ]),
+    handleJwt,
+    async({event, resolve}) => {
+        await event.locals.auth();
+        return await resolve(event);
+    }
+)
 ```
 
-## Developing
+### auth
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+`auth`함수에는 provider로 이루어진 배열이 들어갑니다.
 
-```bash
-npm run dev
+이후에 `event.locals.auth()`를 실행하지 않으면 `event.locals.provider`와 `event.locals.providerAccountId`가 정의되지 않습니다.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+### handleJwt
+
+handleJwt는 `event.locals`에 `setJwt`와 `getJwt` 메소드를 추가시켜줍니다.
+
+### getJwt
+
+```ts
+let jwt = getJwt('cookieName');
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
-
-## Building
-
-To build your library:
-
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
