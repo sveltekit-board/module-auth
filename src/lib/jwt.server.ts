@@ -26,6 +26,10 @@ export default async function handleJwt(input:HandleInput){
                 return null;
             }
 
+            if(token?.exp && token.exp * 1000 < (new Date()).getTime()){
+                return null;
+            }
+
             if(token?.updateMaxage === true){
                 await event.locals.setJwt(cookieName, {
                     data:token.data,
