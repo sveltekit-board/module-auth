@@ -9,7 +9,11 @@ export default async function handleJwt(input:HandleInput){
     const {event, resolve} = input;
     event.locals.setJwt = async(cookieName:string, option:JWTCreateOption) => {
         const jwt = await createJwt(option);
-        event.cookies.set(cookieName, jwt, {path:'/'});
+        event.cookies.set(cookieName, jwt, {
+            path:'/',
+            httpOnly: true,
+            maxAge: option.maxAge || 3600
+        });
     }
     event.locals.getJwt = async(cookieName:string) => {
         let jwt = event.cookies.get(cookieName);
