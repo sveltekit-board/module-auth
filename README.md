@@ -110,6 +110,25 @@ export const handle = sequence(
 <button on:click={() => {signOut()}}>로그아웃</button>
 ```
 
+### express 서버 설정
+```ts
+import express from 'express';
+import {expressHandle} from '@sveltekit-board/auth';
+import {handle} from './build/handle.js';//build된 sveltekit의 handle.js
+
+const app = express();
+app.use(expressHandle)
+
+/*
+*...다른 미들웨어들...
+*/
+
+app.use(handle);
+app.listen(port, () => {});
+```
+`expressHandle` 미들웨어를 사용하면, res.locals에 `provider`, `providerAccountId`, `token` 프로퍼티와 `setJwt`, `getJwt` 메소드가 추가됩니다.
+
+사용법은 sveltekit에서와 같습니다.
 ## 기타
 
 - `@sveltekit-board/user` 모듈을 추가하여, 데이터베이스에 `provider`와 `providerAccountId`가 일치하는 열이 없으면 회원가입 페이지로 이동되도록 할 예정입니다.
