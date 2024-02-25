@@ -1,6 +1,6 @@
 {
 	"name": "@sveltekit-board/auth",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -59,6 +59,8 @@
 	"dependencies": {
 		"@auth/express": "^0.5.0",
 		"@auth/sveltekit": "^0.13.0",
+		"@types/cookie-parser": "^1.4.6",
+		"cookie-parser": "^1.4.6",
 		"dotenv": "^16.4.5"
 	}
 }
